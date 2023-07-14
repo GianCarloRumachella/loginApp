@@ -33,6 +33,7 @@ class _AppScaffoldWidgetState extends State<AppScaffoldWidget> {
     return GestureDetector(
       onTap: widget.onTap ?? () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: widget.hasAppBar
             ? AppBar(
                 elevation: 0,
@@ -60,12 +61,14 @@ class _AppScaffoldWidgetState extends State<AppScaffoldWidget> {
               )
             : null,
         body: SafeArea(
-          child: Padding(
-            padding: widget.padding,
-            child: Column(
-              children: [
-                widget.body,
-              ],
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: widget.padding,
+              child: Column(
+                children: [
+                  widget.body,
+                ],
+              ),
             ),
           ),
         ),

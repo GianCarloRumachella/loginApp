@@ -22,19 +22,19 @@ class AppTypography {
   static TextStyle textBig = const TextStyle(
     color: Colors.blueGrey,
     fontWeight: FontWeight.w300,
-    fontSize: 30,
+    fontSize: 16,
     fontFamily: 'Asap',
   );
   static TextStyle textMedium = const TextStyle(
     color: Colors.blueGrey,
     fontWeight: FontWeight.w300,
-    fontSize: 25,
+    fontSize: 14,
     fontFamily: 'Asap',
   );
   static TextStyle textSmall = const TextStyle(
     color: Colors.blueGrey,
     fontWeight: FontWeight.w300,
-    fontSize: 20,
+    fontSize: 12,
     fontFamily: 'Asap',
   );
   static TextStyle overline = const TextStyle(

@@ -25,8 +25,6 @@ flutter:
     - family: Asap
       fonts:
         - asset: 'assets/fonts/asap.ttf'
-    - family: Caveat
-      fonts:
-        - asset: 'assets/fonts/caveat.ttf'
+   
        
         
