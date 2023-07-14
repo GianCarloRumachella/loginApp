@@ -20,3 +20,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: Asap
+      fonts:
+        - asset: 'assets/fonts/asap.ttf'
+    - family: Caveat
+      fonts:
+        - asset: 'assets/fonts/caveat.ttf'
+       
+        
