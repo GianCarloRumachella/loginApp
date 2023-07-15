@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_modular: ^5.0.3
+  flutter_pw_validator: ^1.6.0
 
 
 dev_dependencies:

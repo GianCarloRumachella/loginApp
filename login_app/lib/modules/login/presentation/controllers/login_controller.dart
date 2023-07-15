@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:login_app/app_routes.dart';
 
 class LoginController {
   final TextEditingController emailController = TextEditingController();
@@ -14,5 +16,9 @@ class LoginController {
     } else {
       enableButton.value = false;
     }
+  }
+
+  void createAccount() {
+    Modular.to.pushNamed(AppRoutes.registration);
   }
 }

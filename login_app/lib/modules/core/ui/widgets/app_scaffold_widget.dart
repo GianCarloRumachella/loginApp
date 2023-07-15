@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:login_app/app_typography.dart';
 
 class AppScaffoldWidget extends StatefulWidget {
   final bool hasAppBar;
@@ -37,16 +38,9 @@ class _AppScaffoldWidgetState extends State<AppScaffoldWidget> {
         appBar: widget.hasAppBar
             ? AppBar(
                 elevation: 0,
-                title: Text(
-                  widget.title,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.amber,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                title: Text(widget.title, style: AppTypography.titleAppBar),
                 centerTitle: true,
-                backgroundColor: Colors.redAccent,
+                backgroundColor: Colors.grey[300],
                 leading: widget.showLeading
                     ? IconButton(
                         onPressed: widget.onIconPressed ??
@@ -60,15 +54,13 @@ class _AppScaffoldWidgetState extends State<AppScaffoldWidget> {
                     : null,
               )
             : null,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: widget.padding,
-              child: Column(
-                children: [
-                  widget.body,
-                ],
-              ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: widget.padding,
+            child: Column(
+              children: [
+                widget.body,
+              ],
             ),
           ),
         ),

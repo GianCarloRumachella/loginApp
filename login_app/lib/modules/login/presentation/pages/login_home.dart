@@ -60,7 +60,7 @@ class _LoginHomeState extends State<LoginHome> {
             AppPasswordTextfieldWidget(
               controller: _controller.passwordController,
               validator: (value) {
-                return Validator.isEmpty(value: value);
+                return Validator.isEmpty(value ?? '');
               },
               onFieldSubmitted: (value) {
                 _controller.validateForm();
@@ -88,7 +88,7 @@ class _LoginHomeState extends State<LoginHome> {
                 const SizedBox(width: 10),
                 TextButton(
                     onPressed: () {
-                      print("criando conta");
+                      _controller.createAccount();
                     },
                     child: Text(
                       'Crie sua conta',
