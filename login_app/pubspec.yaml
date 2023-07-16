@@ -11,7 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_modular: ^5.0.3
-  flutter_pw_validator: ^1.6.0
+  path_provider: ^2.0.15
+  sqflite: ^2.2.8+4
 
 
 dev_dependencies:
