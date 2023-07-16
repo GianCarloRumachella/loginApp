@@ -75,7 +75,7 @@ class _LoginHomeState extends State<LoginHome> {
               builder: (context, value, child) => AppButtonWidget(
                 onPressed: value
                     ? () {
-                        _controller.authUser();
+                        _controller.authUser(context);
                       }
                     : null,
                 label: 'Entrar',

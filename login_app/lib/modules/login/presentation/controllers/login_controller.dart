@@ -28,13 +28,28 @@ class LoginController {
     Modular.to.pushNamed(AppRoutes.registration);
   }
 
-  void authUser() async {
+  void authUser(BuildContext context) async {
     var response = await _authUserUsecase.call(LoginModel(email: emailController.text, password: passwordController.text));
 
     response.fold((l) {
-      print('erro no fold ${l.message}');
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(l.message),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Modular.to.pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }, (r) {
-      print('sucesso no fold $r');
+      Modular.to.pushNamed(AppRoutes.home);
     });
   }
 }

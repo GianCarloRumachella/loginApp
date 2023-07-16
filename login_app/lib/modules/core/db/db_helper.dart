@@ -144,7 +144,7 @@ class DBHelper {
       where: 'email = ?',
       whereArgs: [loginModel.email],
     );
-    print("response ${(response as List).isEmpty}");
+
     late UserModel user;
     if (response.isEmpty) {
       user = UserModel.empty();
