@@ -1,10 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:login_app/modules/core/domain/entities/error_entity.dart';
 import 'package:login_app/modules/core/validators/validator.dart';
+import 'package:login_app/modules/registration/data/models/registration_model.dart';
+import 'package:login_app/modules/registration/domain/usecases/create_user_usecase.dart';
 
 typedef PasswordValidator = String? Function(String value);
 
 class RegistrationController {
+  final CreateUserUsecase _createUserUsecase;
+
+  RegistrationController({
+    required CreateUserUsecase createUserUsecase,
+  }) : _createUserUsecase = createUserUsecase;
+
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -43,5 +54,22 @@ class RegistrationController {
       }
     }
     return null;
+  }
+
+  createUser() async {
+    var response = await _createUserUsecase.call(
+      RegistrationModel(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      ),
+    );
+
+    response.fold((l) {
+      print("erro do fold ${l.message}");
+    }, (r) {
+      print("sucesso do fold $r");
+      Modular.to.pop();
+    });
   }
 }
