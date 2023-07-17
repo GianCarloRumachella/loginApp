@@ -46,6 +46,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             const SizedBox(height: 16),
             AppTextFieldWidget(
+              keyboardType: TextInputType.emailAddress,
               label: 'E-mail',
               controller: _controller.emailController,
               validator: (value) {
@@ -62,6 +63,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   final error = validator.error(value);
                   if (error != null) {
                     validator.isValid = false;
+                    setState(() {});
                     return error;
                   }
                   validator.isValid = true;

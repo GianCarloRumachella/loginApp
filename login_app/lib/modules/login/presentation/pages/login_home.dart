@@ -46,6 +46,7 @@ class _LoginHomeState extends State<LoginHome> {
             ),
             const SizedBox(height: 64),
             AppTextFieldWidget(
+              keyboardType: TextInputType.emailAddress,
               label: 'email',
               controller: _controller.emailController,
               validator: (value) {

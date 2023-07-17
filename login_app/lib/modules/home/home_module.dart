@@ -10,7 +10,7 @@ class HomeModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute(
           AppRoutes.home,
-          child: (context, args) => const HomePage(),
+          child: (context, args) => HomePage(user: args.data),
         )
       ];
 }

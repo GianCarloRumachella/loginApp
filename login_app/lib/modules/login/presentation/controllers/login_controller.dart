@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:login_app/app_routes.dart';
+import 'package:login_app/modules/core/ui/widgets/app_alerts.dart';
 import 'package:login_app/modules/login/data/models/login_model.dart';
 import 'package:login_app/modules/login/domain/usecases/auth_user_usecase.dart';
 
@@ -32,24 +33,9 @@ class LoginController {
     var response = await _authUserUsecase.call(LoginModel(email: emailController.text, password: passwordController.text));
 
     response.fold((l) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(l.message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Modular.to.pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
+      AppAlerts().snackBar(context: context, message: l.message);
     }, (r) {
-      Modular.to.pushNamed(AppRoutes.home);
+      Modular.to.pushReplacementNamed(AppRoutes.home, arguments: r);
     });
   }
 }
