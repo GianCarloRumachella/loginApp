@@ -90,18 +90,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
         builder: (context, value, child) => AppButtonWidget(
             onPressed: value
                 ? () {
-                    AppAlerts().alert(
-                      context: context,
-                      title: 'Senha alterada com sucesso',
-                      message: 'Agora faça o login com sua nova senha.',
-                      buttons: AppButtonWidget(
-                        onPressed: () {
-                          Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
-                        },
-                        label: 'OK',
-                        type: ButtonType.text,
-                      ),
-                    );
+                    _controller.updatePassword(context);
                   }
                 : null,
             label: 'Salvar'),

@@ -160,6 +160,22 @@ class DBHelper {
     return user;
   }
 
+  Future<int> updatePassword(UserModel user) async {
+    var database = await db;
+
+    final response = await database.rawUpdate(
+      "UPDATE $userTable SET password = ? WHERE id = ? ",
+      [
+        user.password,
+        user.id,
+      ],
+    );
+
+    print("response $response");
+
+    return response;
+  }
+
   /* recuperarPessoas(bool ascOrder) async {
     var bancoDados = await db;
 

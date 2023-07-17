@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:login_app/app_routes.dart';
 import 'package:login_app/app_typography.dart';
 import 'package:login_app/modules/configurations/modules/change_password/presentation/controllers/change_password_controller.dart';
 import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
@@ -20,7 +19,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   void initState() {
-    _controller = Modular.get<ChangePasswordController>();
+    _controller = Modular.get<ChangePasswordController>()..init();
     super.initState();
   }
 
@@ -42,7 +41,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             ),
             const SizedBox(height: 36),
             AppPasswordTextfieldWidget(
-              controller: TextEditingController(),
+              controller: _controller.passwordController,
               validator: (value) {
                 return Validator.isEmpty(value ?? '');
               },
@@ -58,7 +57,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         builder: (context, value, child) => AppButtonWidget(
           onPressed: value
               ? () {
-                  Modular.to.pushNamed(AppRoutes.newPassword);
+                  _controller.checkPassword(context);
                 }
               : null,
           label: 'Próximo',
