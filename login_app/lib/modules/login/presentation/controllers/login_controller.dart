@@ -35,7 +35,7 @@ class LoginController {
     response.fold((l) {
       AppAlerts().snackBar(context: context, message: l.message);
     }, (r) {
-      Modular.to.pushReplacementNamed(AppRoutes.home, arguments: r);
+      Modular.to.pushNamed(AppRoutes.home, arguments: r);
     });
   }
 }

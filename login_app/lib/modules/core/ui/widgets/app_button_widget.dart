@@ -49,20 +49,11 @@ class _AppButtonWidgetState extends State<AppButtonWidget> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: style,
-
-      /* ElevatedButton.styleFrom(
-        fixedSize: Size(MediaQuery.of(context).size.width * 0.75, 40),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
-        ),
-        backgroundColor: Colors.greenAccent,
-        elevation: 0,
-      ), */
       onPressed: widget.onPressed,
       child: Text(
         widget.label,
         style: AppTypography.textMedium.copyWith(
-          color: Colors.black,
+          color: widget.type == ButtonType.text ? Colors.blueGrey : Colors.black,
           fontWeight: FontWeight.w600,
         ),
       ),

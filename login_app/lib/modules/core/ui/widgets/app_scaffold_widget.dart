@@ -38,7 +38,7 @@ class _AppScaffoldWidgetState extends State<AppScaffoldWidget> {
         appBar: widget.hasAppBar
             ? AppBar(
                 elevation: 0,
-                title: Text(widget.title, style: AppTypography.titleAppBar),
+                title: Text(widget.title, style: AppTypography.titleAppBar.copyWith(fontWeight: FontWeight.w600)),
                 centerTitle: true,
                 backgroundColor: Colors.grey[300],
                 leading: widget.showLeading
@@ -58,6 +58,7 @@ class _AppScaffoldWidgetState extends State<AppScaffoldWidget> {
           child: Padding(
             padding: widget.padding,
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 widget.body,
               ],

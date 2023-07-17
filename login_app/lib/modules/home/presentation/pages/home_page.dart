@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:login_app/app_routes.dart';
 import 'package:login_app/app_typography.dart';
 import 'package:login_app/modules/core/domain/entities/user_entity.dart';
 import 'package:login_app/modules/core/ui/widgets/app_address_widget.dart';
@@ -22,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     //TODO: liste temporaria
-    tempList = List.generate(Random().nextInt(5), (index) => const AppAddressWidget());
+    //tempList = List.generate(Random().nextInt(5), (index) => const AppAddressWidget());
     super.initState();
   }
 
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                     flex: 1,
                     child: GestureDetector(
                       onTap: () {
-                        print('tela de configurações');
+                        Modular.to.pushNamed(AppRoutes.configuration);
                       },
                       child: const CircleAvatar(
                         maxRadius: 20,
@@ -67,17 +69,19 @@ class _HomePageState extends State<HomePage> {
               Text('Meus Endereços', style: AppTypography.textBig),
               const SizedBox(height: 24),
               SizedBox(
-                child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: tempList.length,
-                  itemBuilder: (context, index) {
-                    return tempList[index];
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(height: 8);
-                  },
-                ),
+                child: tempList.isNotEmpty
+                    ? ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: tempList.length,
+                        itemBuilder: (context, index) {
+                          return tempList[index];
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(height: 8);
+                        },
+                      )
+                    : const Text('Você não possui endereços cadastrados'),
               ),
             ],
           ),

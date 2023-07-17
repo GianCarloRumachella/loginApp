@@ -21,7 +21,7 @@ class AppTypography {
   );
   static TextStyle titleAppBar = const TextStyle(
     color: Colors.blueGrey,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w900,
     fontSize: 22,
     fontFamily: 'Asap',
   );
