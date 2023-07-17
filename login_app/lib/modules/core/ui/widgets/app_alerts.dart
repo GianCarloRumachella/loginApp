@@ -20,14 +20,20 @@ class AppAlerts {
     );
   }
 
-  alert({required BuildContext context, required String message}) {
+  alert({
+    required BuildContext context,
+    required String title,
+    required String message,
+    required Widget buttons,
+  }) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Center(
             child: Text(
-              'Sair do app',
+              title,
               style: AppTypography.textBig.copyWith(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -39,33 +45,13 @@ class AppAlerts {
             children: [
               Center(
                 child: Text(
-                  'Deseja sair do app?',
+                  message,
                   style: AppTypography.textBig,
                 ),
               ),
             ],
           ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                AppButtonWidget(
-                  onPressed: () {
-                    Modular.to.pop();
-                  },
-                  label: 'Não',
-                  type: ButtonType.text,
-                ),
-                AppButtonWidget(
-                  onPressed: () {
-                    Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
-                  },
-                  label: 'Sim',
-                  type: ButtonType.text,
-                ),
-              ],
-            ),
-          ],
+          actions: [buttons],
         );
       },
     );

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:login_app/app_routes.dart';
 import 'package:login_app/app_typography.dart';
 import 'package:login_app/modules/configurations/modules/change_password/presentation/controllers/new_password_controller.dart';
+import 'package:login_app/modules/core/ui/widgets/app_alerts.dart';
+import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_password_errors_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_password_textfield_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_scaffold_widget.dart';
@@ -19,61 +22,89 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
 
   @override
   void initState() {
-    _controller = Modular.get<NewPasswordController>();
+    _controller = Modular.get<NewPasswordController>()..init();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return AppScaffoldWidget(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        _controller.validateForm();
+      },
       title: 'Trocar senha',
-      body: Column(
-        children: [
-          Text(
-            'Insira sua nova senha',
-            style: AppTypography.titleSmall,
-          ),
-          const SizedBox(height: 36),
-          AppPasswordTextfieldWidget(
-            controller: _controller.passwordController,
-            validator: (value) {
-              if (value == null) return null;
+      body: Form(
+        key: _controller.formKey,
+        child: Column(
+          children: [
+            Text(
+              'Insira sua nova senha',
+              style: AppTypography.titleSmall,
+            ),
+            const SizedBox(height: 36),
+            AppPasswordTextfieldWidget(
+              controller: _controller.passwordController,
+              validator: (value) {
+                if (value == null) return null;
 
-              for (final validator in _controller.errors.value) {
-                final error = validator.error(value);
-                if (error != null) {
-                  validator.isValid = false;
+                for (final validator in _controller.errors.value) {
+                  final error = validator.error(value);
+                  if (error != null) {
+                    validator.isValid = false;
+                    setState(() {});
+                    return error;
+                  }
+                  validator.isValid = true;
                   setState(() {});
-                  return error;
                 }
-                validator.isValid = true;
-                setState(() {});
-              }
-              return null;
-            },
-            onChanged: (value) {
-              _controller.password = value;
-              _controller.validateForm();
-              _controller.isPasswordValid(value);
-            },
-          ),
-          const SizedBox(height: 16),
-          ValueListenableBuilder(
-            valueListenable: _controller.errors,
-            builder: (context, value, child) => AppPasswordErrorsWidget(errors: value),
-          ),
-          const SizedBox(height: 16),
-          AppPasswordTextfieldWidget(
-            controller: _controller.confirmPasswordController,
-            validator: (value) {
-              if (value == null) return null;
-              return Validator.isEqual(value, _controller.passwordController.text);
-            },
-            onChanged: (value) {
-              _controller.validateForm();
-            },
-          ),
-        ],
+                return null;
+              },
+              onChanged: (value) {
+                _controller.password = value;
+                _controller.validateForm();
+                _controller.isPasswordValid(value);
+              },
+            ),
+            const SizedBox(height: 16),
+            ValueListenableBuilder(
+              valueListenable: _controller.errors,
+              builder: (context, value, child) => AppPasswordErrorsWidget(errors: value),
+            ),
+            const SizedBox(height: 16),
+            AppPasswordTextfieldWidget(
+              controller: _controller.confirmPasswordController,
+              validator: (value) {
+                if (value == null) return null;
+                return Validator.isEqual(value, _controller.passwordController.text);
+              },
+              onChanged: (value) {
+                _controller.validateForm();
+              },
+            ),
+          ],
+        ),
+      ),
+      bottom: ValueListenableBuilder(
+        valueListenable: _controller.enableButton,
+        builder: (context, value, child) => AppButtonWidget(
+            onPressed: value
+                ? () {
+                    AppAlerts().alert(
+                      context: context,
+                      title: 'Senha alterada com sucesso',
+                      message: 'Agora faça o login com sua nova senha.',
+                      buttons: AppButtonWidget(
+                        onPressed: () {
+                          Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
+                        },
+                        label: 'OK',
+                        type: ButtonType.text,
+                      ),
+                    );
+                  }
+                : null,
+            label: 'Salvar'),
       ),
     );
   }

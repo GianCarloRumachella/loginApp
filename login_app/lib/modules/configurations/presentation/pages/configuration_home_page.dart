@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:login_app/app_routes.dart';
 import 'package:login_app/app_typography.dart';
 import 'package:login_app/modules/core/ui/widgets/app_alerts.dart';
+import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_scaffold_widget.dart';
 
 class ConfigurationHomePage extends StatelessWidget {
@@ -39,7 +40,30 @@ class ConfigurationHomePage extends StatelessWidget {
       ),
       bottom: InkWell(
         onTap: () {
-          AppAlerts().alert(context: context, message: 'xalala');
+          AppAlerts().alert(
+            context: context,
+            title: 'Sair do app',
+            message: 'Deseja sair do app?',
+            buttons: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                AppButtonWidget(
+                  onPressed: () {
+                    Modular.to.pop();
+                  },
+                  label: 'Não',
+                  type: ButtonType.text,
+                ),
+                AppButtonWidget(
+                  onPressed: () {
+                    Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
+                  },
+                  label: 'Sim',
+                  type: ButtonType.text,
+                ),
+              ],
+            ),
+          );
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
