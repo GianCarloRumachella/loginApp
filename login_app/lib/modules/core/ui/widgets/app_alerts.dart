@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:login_app/app_routes.dart';
 import 'package:login_app/app_typography.dart';
-import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
 
 class AppAlerts {
   snackBar({required BuildContext context, required String message}) {

@@ -101,7 +101,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         builder: (context, value, child) => AppButtonWidget(
           onPressed: value
               ? () {
-                  _controller.createUser();
+                  _controller.createUser(context);
                 }
               : null,
           label: 'Criar',

@@ -38,11 +38,7 @@ class _AppAddressWidgetState extends State<AppAddressWidget> {
                     ],
                   ),
                 ),
-                IconButton(
-                    onPressed: () {
-                      print('abrir tela de edição');
-                    },
-                    icon: const Icon(Icons.edit))
+                IconButton(onPressed: () {}, icon: const Icon(Icons.edit))
               ],
             ),
           ),
