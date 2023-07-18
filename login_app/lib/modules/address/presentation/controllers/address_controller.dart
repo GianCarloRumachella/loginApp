@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:login_app/app_routes.dart';
+import 'package:login_app/modules/address/data/models/address_model.dart';
 import 'package:login_app/modules/address/domain/usecases/get_address_usecase.dart';
+import 'package:login_app/modules/address/domain/usecases/save_address_usecase.dart';
+import 'package:login_app/modules/core/domain/entities/address_entity.dart';
 import 'package:login_app/modules/core/ui/widgets/app_alerts.dart';
+import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
+import 'package:login_app/modules/home/presentation/controllers/home_controller.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 
 class AddressController {
-  final GetAddressUsecase _usecase;
+  final GetAddressUsecase _getAddressUsecase;
+  final SaveAddressUsecase _saveAddressUsecase;
 
-  AddressController({required GetAddressUsecase usecase}) : _usecase = usecase;
+  AddressController({
+    required GetAddressUsecase getAddressUsecase,
+    required SaveAddressUsecase saveAddressUsecase,
+  })  : _getAddressUsecase = getAddressUsecase,
+        _saveAddressUsecase = saveAddressUsecase;
 
   TextEditingController zipCodeController = TextEditingController();
   TextEditingController streetController = TextEditingController();
@@ -30,7 +42,7 @@ class AddressController {
 
   getZipCode(BuildContext context) async {
     OverlayLoadingProgress.start(context);
-    final response = await _usecase.call(zipCodeController.text);
+    final response = await _getAddressUsecase.call(zipCodeController.text);
     OverlayLoadingProgress.stop();
 
     response.fold((l) {
@@ -43,6 +55,39 @@ class AddressController {
       neighborhoodController.text = r.neighborhood;
       cityController.text = r.city;
       stateController.text = r.state;
+    });
+  }
+
+  saveAddress(BuildContext context) async {
+    AddressModel address = AddressModel(
+      zipCode: zipCodeController.text,
+      street: streetController.text,
+      number: numberController.text,
+      complement: complementController.text,
+      neighborhood: neighborhoodController.text,
+      city: cityController.text,
+      state: stateController.text,
+    );
+    OverlayLoadingProgress.start(context);
+    final response = await _saveAddressUsecase.call(address);
+    OverlayLoadingProgress.stop();
+
+    response.fold((l) {
+      AppAlerts().snackBar(context: context, message: l.message);
+    }, (r) {
+      print('endereço $r');
+      AppAlerts().alert(
+        context: context,
+        title: 'Salvo',
+        message: 'Seu endereço foi salvo com sucesso',
+        buttons: AppButtonWidget(
+          onPressed: () {
+            Modular.get<HomeController>().init(context);
+            Modular.to.popUntil(ModalRoute.withName(AppRoutes.home));
+          },
+          label: 'Ok',
+        ),
+      );
     });
   }
 }

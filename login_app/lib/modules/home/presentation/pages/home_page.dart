@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       flex: 6,
                       child: Text(
-                        'Olá, ${_controller.user.value.name}!',
+                        'Olá, ${_controller.user.value.name.split(' ')[0]}!',
                         style: AppTypography.titleSmall,
                       ),
                     ),

@@ -4,6 +4,7 @@ import 'package:login_app/modules/address/data/datasource/address_datasoure.dart
 import 'package:login_app/modules/address/data/datasource/remote/address_datasource_imp.dart';
 import 'package:login_app/modules/address/domain/repositories/address_repository.dart';
 import 'package:login_app/modules/address/domain/usecases/get_address_usecase.dart';
+import 'package:login_app/modules/address/domain/usecases/save_address_usecase.dart';
 import 'package:login_app/modules/address/presentation/controllers/address_controller.dart';
 import 'package:login_app/modules/address/presentation/pages/address_page.dart';
 import 'package:login_app/modules/address/data/repositories/address_repository_imp.dart';
@@ -24,9 +25,15 @@ class AddressModule extends Module {
             repository: i.get<AddressRepository>(),
           ),
         ),
+        Bind.lazySingleton<SaveAddressUsecase>(
+          (i) => SaveAddressUsecaseImp(
+            repository: i.get<AddressRepository>(),
+          ),
+        ),
         Bind.lazySingleton<AddressController>(
           (i) => AddressController(
-            usecase: i.get<GetAddressUsecase>(),
+            getAddressUsecase: i.get<GetAddressUsecase>(),
+            saveAddressUsecase: i.get<SaveAddressUsecase>(),
           ),
         ),
       ];

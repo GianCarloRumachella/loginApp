@@ -119,7 +119,11 @@ class _AddressPageState extends State<AddressPage> {
       bottom: ValueListenableBuilder(
         valueListenable: _controller.enableButton,
         builder: (context, value, child) => AppButtonWidget(
-          onPressed: value ? () {} : null,
+          onPressed: value
+              ? () {
+                  _controller.saveAddress(context);
+                }
+              : null,
           label: 'Salvar',
         ),
       ),
