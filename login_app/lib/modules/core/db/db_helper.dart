@@ -181,6 +181,46 @@ class DBHelper {
 
     return resultado;
   }
+
+  Future<List<AddressModel>> getAddressesByUser(String id) async {
+    var database = await db;
+    List<AddressModel> list = [];
+
+    final response = await database.query(
+      addressTable,
+      columns: [
+        "id",
+        "zipcode",
+        "street",
+        "number",
+        "complement",
+        "neighborhood",
+        "city",
+        "state",
+        "id_user",
+      ],
+      where: 'id_user = ?',
+      whereArgs: [id],
+    );
+
+    for (var address in response) {
+      list.add(
+        AddressModel(
+          id: address['id'].toString(),
+          zipCode: address['zipcode'],
+          street: address['street'],
+          number: address['number'],
+          complement: address['complement'],
+          neighborhood: address['neighborhood'],
+          city: address['city'],
+          state: address['state'],
+        ),
+      );
+    }
+
+    return list;
+  }
+
   /* recuperarPessoas(bool ascOrder) async {
     var bancoDados = await db;
 

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:login_app/app_routes.dart';
 import 'package:login_app/app_typography.dart';
-import 'package:login_app/modules/core/ui/widgets/app_address_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
-
 import 'package:login_app/modules/core/ui/widgets/app_scaffold_widget.dart';
 import 'package:login_app/modules/home/presentation/controllers/home_controller.dart';
 
@@ -16,15 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<AppAddressWidget> tempList = [];
-
   late final HomeController _controller;
 
   @override
   void initState() {
     _controller = Modular.get<HomeController>()..init(context);
-    //TODO: liste temporaria
-    //tempList = List.generate(Random().nextInt(5), (index) => const AppAddressWidget());
+
     super.initState();
   }
 
@@ -71,17 +66,20 @@ class _HomePageState extends State<HomePage> {
                 Text('Meus Endereços', style: AppTypography.textBig),
                 const SizedBox(height: 24),
                 SizedBox(
-                  child: tempList.isNotEmpty
-                      ? ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: tempList.length,
-                          itemBuilder: (context, index) {
-                            return tempList[index];
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(height: 8);
-                          },
+                  child: _controller.addresses.value.isNotEmpty
+                      ? ValueListenableBuilder(
+                          valueListenable: _controller.addresses,
+                          builder: (context, value, child) => ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: value.length,
+                            itemBuilder: (context, index) {
+                              return value[index];
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return const SizedBox(height: 8);
+                            },
+                          ),
                         )
                       : const Text('Você não possui endereços cadastrados'),
                 ),
