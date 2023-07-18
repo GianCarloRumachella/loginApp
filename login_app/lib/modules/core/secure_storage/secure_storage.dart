@@ -28,6 +28,10 @@ class SecureStorage {
     return user;
   }
 
+  Future<void> deleteSession() async {
+    await _storage.deleteAll(aOptions: getAndroidOptions());
+  }
+
   AndroidOptions getAndroidOptions() => const AndroidOptions(
         encryptedSharedPreferences: true,
       );

@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:login_app/app_routes.dart';
 import 'package:login_app/app_typography.dart';
+import 'package:login_app/modules/configurations/presentation/controllers/configuration_controller.dart';
+
 import 'package:login_app/modules/core/ui/widgets/app_alerts.dart';
 import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_scaffold_widget.dart';
 
 class ConfigurationHomePage extends StatelessWidget {
-  const ConfigurationHomePage({super.key});
+  ConfigurationHomePage({super.key});
+
+  final ConfigurationController _controller = Modular.get<ConfigurationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +59,8 @@ class ConfigurationHomePage extends StatelessWidget {
                   type: ButtonType.text,
                 ),
                 AppButtonWidget(
-                  onPressed: () {
-                    Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
+                  onPressed: () async {
+                    await _controller.logout();
                   },
                   label: 'Sim',
                   type: ButtonType.text,

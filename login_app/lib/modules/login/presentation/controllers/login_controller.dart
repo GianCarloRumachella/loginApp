@@ -42,7 +42,7 @@ class LoginController {
     }, (r) async {
       await SecureStorage().saveSession(r);
 
-      Modular.to.pushNamed(AppRoutes.home, arguments: r);
+      Modular.to.pushNamed(AppRoutes.home);
     });
   }
 }

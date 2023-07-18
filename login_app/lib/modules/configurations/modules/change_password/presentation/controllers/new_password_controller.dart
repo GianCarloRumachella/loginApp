@@ -74,7 +74,8 @@ class NewPasswordController {
         title: 'Sucesso!',
         message: 'Sua senha foi alterada. Faça o login com sua nova senha',
         buttons: AppButtonWidget(
-            onPressed: () {
+            onPressed: () async {
+              await SecureStorage().deleteSession();
               Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
             },
             label: 'Fazer Login'),
