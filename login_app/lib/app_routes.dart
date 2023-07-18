@@ -9,4 +9,6 @@ class AppRoutes {
 
   static String password = '/password';
   static String newPassword = '/new-password';
+
+  static String address = '/address';
 }

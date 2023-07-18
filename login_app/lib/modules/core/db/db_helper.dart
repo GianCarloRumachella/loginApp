@@ -86,7 +86,7 @@ class DBHelper {
     String user = "CREATE TABLE $userTable ("
         "id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(150), email VARCHAR(150), password VARCHAR(20))";
     String address = "CREATE TABLE $addressTable ("
-        "id INTEGER PRIMARY KEY AUTOINCREMENT, zipcode VARCHAR(10), street VARCHAR(50), number VARCHAR(10), complement VARCHAR(50), neighbourhood VARCHAR(50), state VARCHAR(2), id_user INT, FOREIGN KEY(id_user) REFERENCES USER(id))";
+        "id INTEGER PRIMARY KEY AUTOINCREMENT, zipcode VARCHAR(10), street VARCHAR(50), number VARCHAR(10), complement VARCHAR(50), neighbourhood VARCHAR(50), city VARCHAR(50), state VARCHAR(2), id_user INT, FOREIGN KEY(id_user) REFERENCES USER(id))";
 
     await db.execute(user);
     await db.execute(address);
@@ -170,8 +170,6 @@ class DBHelper {
         user.id,
       ],
     );
-
-    print("response $response");
 
     return response;
   }
