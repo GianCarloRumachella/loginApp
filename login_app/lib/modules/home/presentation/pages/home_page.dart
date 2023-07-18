@@ -34,7 +34,6 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
                       flex: 1,

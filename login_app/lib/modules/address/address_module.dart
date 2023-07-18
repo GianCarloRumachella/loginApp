@@ -5,6 +5,7 @@ import 'package:login_app/modules/address/data/datasource/remote/address_datasou
 import 'package:login_app/modules/address/domain/repositories/address_repository.dart';
 import 'package:login_app/modules/address/domain/usecases/get_address_usecase.dart';
 import 'package:login_app/modules/address/domain/usecases/save_address_usecase.dart';
+import 'package:login_app/modules/address/domain/usecases/update_address_usecase.dart';
 import 'package:login_app/modules/address/presentation/controllers/address_controller.dart';
 import 'package:login_app/modules/address/presentation/pages/address_page.dart';
 import 'package:login_app/modules/address/data/repositories/address_repository_imp.dart';
@@ -30,10 +31,16 @@ class AddressModule extends Module {
             repository: i.get<AddressRepository>(),
           ),
         ),
+        Bind.lazySingleton<UpdateAddressUsecase>(
+          (i) => UpdateAddressUsecaseImp(
+            repository: i.get<AddressRepository>(),
+          ),
+        ),
         Bind.lazySingleton<AddressController>(
           (i) => AddressController(
             getAddressUsecase: i.get<GetAddressUsecase>(),
             saveAddressUsecase: i.get<SaveAddressUsecase>(),
+            updateAddressUsecase: i.get<UpdateAddressUsecase>(),
           ),
         ),
       ];
@@ -42,7 +49,7 @@ class AddressModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute(
           AppRoutes.address,
-          child: (context, args) => const AddressPage(),
+          child: (context, args) => AddressPage(addressToEdit: args.data),
         )
       ];
 }

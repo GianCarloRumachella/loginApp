@@ -25,4 +25,11 @@ class AddressDatasourceImp implements AddressDatasource {
 
     return response;
   }
+
+  @override
+  Future<int> updateAddress(AddressModel address) async {
+    var response = await _db.updateAddress(address);
+
+    return response;
+  }
 }

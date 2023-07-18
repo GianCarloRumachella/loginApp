@@ -5,4 +5,5 @@ import 'package:login_app/modules/core/failures/failure.dart';
 abstract class AddressRepository {
   Future<Either<Failure, AddressModel>> getAddress(String zipCode);
   Future<Either<Failure, int>> saveAddress(AddressModel address);
+  Future<Either<Failure, int>> updateAddress(AddressModel address);
 }

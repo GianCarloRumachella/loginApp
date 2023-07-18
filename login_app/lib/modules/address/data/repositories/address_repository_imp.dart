@@ -28,4 +28,14 @@ class AddressRepositoryImp implements AddressRepository {
       return Left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, int>> updateAddress(AddressModel address) async {
+    try {
+      var response = await _datasource.updateAddress(address);
+      return Right(response);
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
 }

@@ -60,7 +60,7 @@ class ConfigurationHomePage extends StatelessWidget {
                 ),
                 AppButtonWidget(
                   onPressed: () async {
-                    await _controller.logout();
+                    _controller.logout();
                   },
                   label: 'Sim',
                   type: ButtonType.text,

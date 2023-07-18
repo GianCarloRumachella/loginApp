@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   flutter_modular: ^5.0.3
   flutter_secure_storage: ^8.0.0
+  mask_text_input_formatter: ^2.5.0
   overlay_loading_progress: ^1.0.1
   path: ^1.8.3
   sqflite: ^2.2.8+4

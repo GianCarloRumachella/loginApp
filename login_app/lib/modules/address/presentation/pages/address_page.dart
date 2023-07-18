@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:login_app/modules/address/data/models/address_model.dart';
 import 'package:login_app/modules/address/presentation/controllers/address_controller.dart';
+import 'package:login_app/modules/core/masks/masks.dart';
 import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
+import 'package:login_app/modules/core/ui/widgets/app_dropdown_menu_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_scaffold_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_textfield_widget.dart';
 import 'package:login_app/modules/core/validators/validator.dart';
 
 class AddressPage extends StatefulWidget {
-  const AddressPage({super.key});
+  final AddressModel? addressToEdit;
+  const AddressPage({super.key, this.addressToEdit});
 
   @override
   State<AddressPage> createState() => _AddressPageState();
@@ -19,6 +23,9 @@ class _AddressPageState extends State<AddressPage> {
   @override
   void initState() {
     _controller = Modular.get<AddressController>();
+    if (widget.addressToEdit != null) {
+      _controller.setupAddressToEdit(widget.addressToEdit!);
+    }
     super.initState();
   }
 
@@ -36,6 +43,7 @@ class _AddressPageState extends State<AddressPage> {
           children: [
             AppTextFieldWidget(
               label: 'CEP',
+              inputFormatter: [Masks.maskZipCode],
               keyboardType: TextInputType.number,
               controller: _controller.zipCodeController,
               validator: (value) {
@@ -105,13 +113,21 @@ class _AddressPageState extends State<AddressPage> {
               },
             ),
             const SizedBox(height: 12),
-            AppTextFieldWidget(
+            /*  AppTextFieldWidget(
               label: 'Estado',
               keyboardType: TextInputType.name,
               controller: _controller.stateController,
               validator: (value) {
                 return Validator.isEmpty(value ?? '');
               },
+            ), */
+            const SizedBox(height: 12),
+            AppDropdownMenuWidget(
+              controller: _controller.stateController,
+              options: List.generate(
+                10,
+                (index) => index.toString(),
+              ),
             ),
           ],
         ),
@@ -121,7 +137,11 @@ class _AddressPageState extends State<AddressPage> {
         builder: (context, value, child) => AppButtonWidget(
           onPressed: value
               ? () {
-                  _controller.saveAddress(context);
+                  if (widget.addressToEdit == null) {
+                    _controller.saveAddress(context);
+                  } else {
+                    _controller.updateAddress(context);
+                  }
                 }
               : null,
           label: 'Salvar',

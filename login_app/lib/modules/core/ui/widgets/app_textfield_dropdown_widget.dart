@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_app/app_typography.dart';
 
-class AppTextFieldWidget extends StatefulWidget {
+class AppTextFieldDropdownWidget extends StatefulWidget {
   final String label;
   final TextEditingController controller;
   final Function(String)? onChanged;
@@ -12,7 +12,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final TextInputType keyboardType;
   final List<TextInputFormatter>? inputFormatter;
 
-  const AppTextFieldWidget({
+  const AppTextFieldDropdownWidget({
     super.key,
     this.label = '',
     required this.controller,
@@ -25,18 +25,21 @@ class AppTextFieldWidget extends StatefulWidget {
   });
 
   @override
-  State<AppTextFieldWidget> createState() => _AppTextFieldWidgetState();
+  State<AppTextFieldDropdownWidget> createState() => _AppTextFieldDropdownWidgetState();
 }
 
-class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
+class _AppTextFieldDropdownWidgetState extends State<AppTextFieldDropdownWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: true,
+      enabled: false,
       inputFormatters: widget.inputFormatter,
       keyboardType: widget.keyboardType,
       controller: widget.controller,
       validator: widget.validator,
       decoration: InputDecoration(
+        suffixIcon: const Icon(Icons.arrow_drop_down),
         label: Text(
           widget.label,
           style: AppTypography.overline.copyWith(fontSize: 16),

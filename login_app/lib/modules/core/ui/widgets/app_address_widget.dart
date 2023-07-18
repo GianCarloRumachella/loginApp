@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:login_app/app_routes.dart';
 import 'package:login_app/modules/address/data/models/address_model.dart';
 
 class AppAddressWidget extends StatefulWidget {
@@ -46,7 +48,7 @@ class _AppAddressWidgetState extends State<AppAddressWidget> {
                 ),
                 IconButton(
                     onPressed: () {
-                      print("editar ${widget.model.id}");
+                      Modular.to.pushNamed(AppRoutes.address, arguments: widget.model);
                     },
                     icon: const Icon(Icons.edit))
               ],

@@ -15,9 +15,22 @@ class AddressModel extends AddressEntity {
     super.userId,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMapUpdate() {
     return <String, dynamic>{
       'id': id.toString(),
+      'zipCode': zipCode,
+      'street': street,
+      'number': number,
+      'complement': complement,
+      'neighborhood': neighborhood,
+      'city': city,
+      'state': state,
+      'id_user': userId.toString(),
+    };
+  }
+
+  Map<String, dynamic> toMapInsert() {
+    return <String, dynamic>{
       'zipCode': zipCode,
       'street': street,
       'number': number,
@@ -41,7 +54,8 @@ class AddressModel extends AddressEntity {
     );
   }
 
-  String toJson() => json.encode(toMap());
+  String toJsonInsert() => json.encode(toMapInsert());
+  String toJsonUpdate() => json.encode(toMapUpdate());
 
   factory AddressModel.fromJson(String source) => AddressModel.fromMap(json.decode(source) as Map<String, dynamic>);
 

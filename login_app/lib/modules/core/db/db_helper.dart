@@ -177,7 +177,7 @@ class DBHelper {
 
   Future<int> saveAddress(AddressModel address) async {
     var database = await db;
-    int resultado = await database.insert(addressTable, address.toMap());
+    int resultado = await database.insert(addressTable, address.toMapInsert());
 
     return resultado;
   }
@@ -221,7 +221,16 @@ class DBHelper {
     return list;
   }
 
-  /* recuperarPessoas(bool ascOrder) async {
+  Future<int> updateAddress(AddressModel address) async {
+    var database = await db;
+    return await database.update(addressTable, address.toMapUpdate(), where: "id = ?", whereArgs: [address.id]);
+  }
+
+  /* Future<int> atualizarPessoas(Pessoa pessoa) async {
+    var bancoDados = await db;
+    return await bancoDados.update(tabelaPessoas, pessoa.toMap(), where: "id = ?", whereArgs: [pessoa.id]);
+  }
+   recuperarPessoas(bool ascOrder) async {
     var bancoDados = await db;
 
     if (ascOrder) {
@@ -243,10 +252,6 @@ class DBHelper {
     return await bancoDados.delete(tabelaPessoas, where: "id = ?", whereArgs: [id]);
   }
 
-  Future<int> atualizarPessoas(Pessoa pessoa) async {
-    var bancoDados = await db;
-    return await bancoDados.update(tabelaPessoas, pessoa.toMap(), where: "id = ?", whereArgs: [pessoa.id]);
-  }
 
   Future<int> removerPessoaItens() async {
     var bancoDados = await db;
