@@ -37,6 +37,7 @@ class _LoginHomeState extends State<LoginHome> {
         key: _controller.formKey,
         child: Column(
           children: [
+            SizedBox(height: MediaQuery.sizeOf(context).height * .2),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
@@ -47,7 +48,7 @@ class _LoginHomeState extends State<LoginHome> {
             const SizedBox(height: 64),
             AppTextFieldWidget(
               keyboardType: TextInputType.emailAddress,
-              label: 'email',
+              label: 'E-mail',
               controller: _controller.emailController,
               validator: (value) {
                 return Validator.isValidEmail(value: value);
@@ -90,7 +91,7 @@ class _LoginHomeState extends State<LoginHome> {
                   'Ainda não tem conta?',
                   style: AppTypography.textMedium,
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 4),
                 TextButton(
                     onPressed: () {
                       _controller.createAccount();

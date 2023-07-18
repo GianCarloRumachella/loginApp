@@ -26,11 +26,11 @@ class _AppButtonWidgetState extends State<AppButtonWidget> {
     switch (widget.type) {
       case ButtonType.green:
         return ElevatedButton.styleFrom(
-          fixedSize: Size(MediaQuery.of(context).size.width * 0.75, 40),
+          fixedSize: Size(MediaQuery.of(context).size.width, 40),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),
-          backgroundColor: Colors.greenAccent,
+          backgroundColor: Colors.green[500],
           elevation: 0,
         );
       case ButtonType.text:
@@ -38,7 +38,7 @@ class _AppButtonWidgetState extends State<AppButtonWidget> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(40),
             ),
-            backgroundColor: Colors.transparent,
+            backgroundColor: widget.type == ButtonType.text ? Colors.grey[400] : Colors.transparent,
             elevation: 0,
             shadowColor: Colors.grey[100],
             foregroundColor: Colors.transparent);
@@ -53,8 +53,8 @@ class _AppButtonWidgetState extends State<AppButtonWidget> {
       child: Text(
         widget.label,
         style: AppTypography.textMedium.copyWith(
-          color: widget.type == ButtonType.text ? Colors.blueGrey : Colors.black,
-          fontWeight: FontWeight.w600,
+          color: widget.type == ButtonType.text ? Colors.black : Colors.black,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );

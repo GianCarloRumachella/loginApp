@@ -37,7 +37,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           children: [
             Text(
               'Insira sua senha atual',
-              style: AppTypography.titleSmall,
+              style: AppTypography.titleSmall.copyWith(fontSize: 30),
             ),
             const SizedBox(height: 36),
             AppPasswordTextfieldWidget(

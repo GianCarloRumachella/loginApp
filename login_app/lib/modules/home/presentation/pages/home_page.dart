@@ -34,9 +34,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(
-                      flex: 1,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: GestureDetector(
                         onTap: () {
                           Modular.to.pushNamed(AppRoutes.configuration);
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                           maxRadius: 20,
                           child: Icon(
                             Icons.account_circle,
-                            size: 40,
+                            size: 50,
                             color: Colors.blueGrey,
                           ),
                         ),
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 70),
                 Text('Meus Endereços', style: AppTypography.textBig),
                 const SizedBox(height: 24),
                 SizedBox(
@@ -90,8 +91,8 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             _controller.addAddress();
           },
-          label: 'adicionar endereço',
-          type: ButtonType.text,
+          label: 'Adicionar endereço',
+          type: ButtonType.green,
         ),
       ),
     );

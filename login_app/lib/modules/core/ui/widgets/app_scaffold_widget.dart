@@ -47,8 +47,9 @@ class _AppScaffoldWidgetState extends State<AppScaffoldWidget> {
                             () async {
                               Modular.to.pop();
                             },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.arrow_back,
+                          color: Colors.blueGrey[700],
                         ),
                       )
                     : null,

@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:login_app/modules/address/data/models/address_model.dart';
 import 'package:login_app/modules/address/presentation/controllers/address_controller.dart';
 import 'package:login_app/modules/core/masks/masks.dart';
+import 'package:login_app/modules/core/misc/brazilian_states.dart';
 import 'package:login_app/modules/core/ui/widgets/app_button_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_dropdown_menu_widget.dart';
 import 'package:login_app/modules/core/ui/widgets/app_scaffold_widget.dart';
@@ -113,21 +114,10 @@ class _AddressPageState extends State<AddressPage> {
               },
             ),
             const SizedBox(height: 12),
-            /*  AppTextFieldWidget(
-              label: 'Estado',
-              keyboardType: TextInputType.name,
-              controller: _controller.stateController,
-              validator: (value) {
-                return Validator.isEmpty(value ?? '');
-              },
-            ), */
             const SizedBox(height: 12),
             AppDropdownMenuWidget(
               controller: _controller.stateController,
-              options: List.generate(
-                10,
-                (index) => index.toString(),
-              ),
+              options: brazilianStates,
             ),
           ],
         ),

@@ -8,7 +8,7 @@ class Validator {
 
   static String? isEmpty(String value) {
     if (value.isEmpty) {
-      return 'Esse campo não pode ser vazio';
+      return '';
     }
     return null;
   }

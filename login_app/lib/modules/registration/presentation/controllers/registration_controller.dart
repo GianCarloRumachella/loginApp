@@ -32,12 +32,11 @@ class RegistrationController {
 
   void init() {
     errors.value = [
-      ErrorEntity(error: Validator.isEmpty, isValid: false, message: 'Não pode ser vazia'),
       ErrorEntity(error: Validator.containsLowerCaseLetter, isValid: false, message: 'Deve conter uma letra minúscula'),
       ErrorEntity(error: Validator.containsNumber, isValid: false, message: 'Deve conter um número'),
       ErrorEntity(error: Validator.containsUpperCaseLetter, isValid: false, message: 'Deve conter uma letra maiúscula'),
       ErrorEntity(error: Validator.containsSpecialCharacter, isValid: false, message: 'Deve conter um caracter especial'),
-      ErrorEntity(error: Validator.hasMinimumLength, isValid: false, message: 'deve conter no mínimo 8 caracteres'),
+      ErrorEntity(error: Validator.hasMinimumLength, isValid: false, message: 'Deve conter no mínimo 8 caracteres'),
     ];
   }
 
@@ -73,14 +72,15 @@ class RegistrationController {
     }, (r) {
       AppAlerts().alert(
         context: context,
-        title: 'Cadastro realizado com sucesso',
-        message: '',
-        buttons: AppButtonWidget(
-          type: ButtonType.text,
-          onPressed: () {
-            Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
-          },
-          label: 'Ir para o login',
+        title: '',
+        message: 'Cadastro realizado com sucesso',
+        buttons: Center(
+          child: AppButtonWidget(
+            onPressed: () {
+              Modular.to.popUntil(ModalRoute.withName(AppRoutes.initialRoute));
+            },
+            label: 'Ir para o login',
+          ),
         ),
       );
     });

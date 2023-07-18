@@ -1,50 +1,50 @@
 import 'package:flutter/material.dart';
 
 class AppTypography {
-  static TextStyle titleBig = const TextStyle(
-    color: Colors.blueGrey,
+  static TextStyle titleBig = TextStyle(
+    color: Colors.blueGrey[700],
     fontWeight: FontWeight.w800,
     fontSize: 60,
     fontFamily: 'Asap',
   );
-  static TextStyle titleMedium = const TextStyle(
-    color: Colors.blueGrey,
-    fontWeight: FontWeight.w600,
+  static TextStyle titleMedium = TextStyle(
+    color: Colors.blueGrey[700],
+    fontWeight: FontWeight.w700,
     fontSize: 50,
     fontFamily: 'Asap',
   );
-  static TextStyle titleSmall = const TextStyle(
-    color: Colors.blueGrey,
+  static TextStyle titleSmall = TextStyle(
+    color: Colors.blueGrey[700],
     fontWeight: FontWeight.w400,
     fontSize: 40,
     fontFamily: 'Asap',
   );
-  static TextStyle titleAppBar = const TextStyle(
-    color: Colors.blueGrey,
-    fontWeight: FontWeight.w900,
+  static TextStyle titleAppBar = TextStyle(
+    color: Colors.blueGrey[700],
+    fontWeight: FontWeight.w700,
     fontSize: 22,
     fontFamily: 'Asap',
   );
-  static TextStyle textBig = const TextStyle(
-    color: Colors.blueGrey,
+  static TextStyle textBig = TextStyle(
+    color: Colors.blueGrey[700],
     fontWeight: FontWeight.w300,
     fontSize: 16,
     fontFamily: 'Asap',
   );
-  static TextStyle textMedium = const TextStyle(
-    color: Colors.blueGrey,
+  static TextStyle textMedium = TextStyle(
+    color: Colors.blueGrey[700],
     fontWeight: FontWeight.w300,
     fontSize: 14,
     fontFamily: 'Asap',
   );
-  static TextStyle textSmall = const TextStyle(
-    color: Colors.blueGrey,
+  static TextStyle textSmall = TextStyle(
+    color: Colors.blueGrey[700],
     fontWeight: FontWeight.w300,
     fontSize: 12,
     fontFamily: 'Asap',
   );
-  static TextStyle overline = const TextStyle(
-    color: Colors.blueGrey,
+  static TextStyle overline = TextStyle(
+    color: Colors.blueGrey[700],
     fontWeight: FontWeight.w300,
     fontSize: 12,
     fontFamily: 'Asap',

@@ -27,12 +27,11 @@ class NewPasswordController {
 
   void init() {
     errors.value = [
-      ErrorEntity(error: Validator.isEmpty, isValid: false, message: 'Não pode ser vazia'),
       ErrorEntity(error: Validator.containsLowerCaseLetter, isValid: false, message: 'Deve conter uma letra minúscula'),
       ErrorEntity(error: Validator.containsNumber, isValid: false, message: 'Deve conter um número'),
       ErrorEntity(error: Validator.containsUpperCaseLetter, isValid: false, message: 'Deve conter uma letra maiúscula'),
       ErrorEntity(error: Validator.containsSpecialCharacter, isValid: false, message: 'Deve conter um caracter especial'),
-      ErrorEntity(error: Validator.hasMinimumLength, isValid: false, message: 'deve conter no mínimo 8 caracteres'),
+      ErrorEntity(error: Validator.hasMinimumLength, isValid: false, message: 'Deve conter no mínimo 8 caracteres'),
     ];
   }
 
@@ -72,7 +71,7 @@ class NewPasswordController {
       AppAlerts().alert(
         context: context,
         title: 'Sucesso!',
-        message: 'Sua senha foi alterada. Faça o login com sua nova senha',
+        message: 'Sua senha foi alterada. Faça o login com sua nova senha.',
         buttons: AppButtonWidget(
             onPressed: () async {
               await SecureStorage().deleteSession();

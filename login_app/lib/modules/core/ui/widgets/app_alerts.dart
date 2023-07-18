@@ -28,22 +28,24 @@ class AppAlerts {
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: Center(
-            child: Text(
-              title,
-              style: AppTypography.textBig.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
+          title: title.isEmpty
+              ? Container()
+              : Center(
+                  child: Text(
+                    title,
+                    style: AppTypography.textBig.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Center(
                 child: Text(
                   message,
-                  style: AppTypography.textBig,
+                  style: AppTypography.textBig.copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
             ],

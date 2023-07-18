@@ -37,6 +37,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         key: _controller.formKey,
         child: Column(
           children: [
+            SizedBox(height: MediaQuery.sizeOf(context).height * .04),
             AppTextFieldWidget(
               label: 'Nome Completo',
               controller: _controller.nameController,
@@ -78,11 +79,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               },
             ),
             const SizedBox(height: 16),
-            ValueListenableBuilder(
-              valueListenable: _controller.errors,
-              builder: (context, value, child) => AppPasswordErrorsWidget(errors: value),
-            ),
-            const SizedBox(height: 16),
             AppPasswordTextfieldWidget(
               controller: _controller.confirmPasswordController,
               validator: (value) {
@@ -92,6 +88,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
               onChanged: (value) {
                 _controller.validateForm();
               },
+            ),
+            const SizedBox(height: 16),
+            ValueListenableBuilder(
+              valueListenable: _controller.errors,
+              builder: (context, value, child) => Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: AppPasswordErrorsWidget(errors: value),
+                ),
+              ),
             ),
           ],
         ),
