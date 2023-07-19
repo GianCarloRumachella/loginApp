@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:login_app/app_typography.dart';
 
 class AppTextFieldDropdownWidget extends StatefulWidget {
   final String label;
@@ -39,11 +38,12 @@ class _AppTextFieldDropdownWidgetState extends State<AppTextFieldDropdownWidget>
       controller: widget.controller,
       validator: widget.validator,
       decoration: InputDecoration(
-        suffixIcon: const Icon(Icons.arrow_drop_down),
-        label: Text(
-          widget.label,
-          style: AppTypography.overline.copyWith(fontSize: 16),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
+        errorStyle: const TextStyle(height: 0),
+        suffixIcon: const Icon(Icons.arrow_drop_down),
+        hintText: widget.label,
         contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),

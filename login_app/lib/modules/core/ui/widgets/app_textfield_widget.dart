@@ -11,6 +11,7 @@ class AppTextFieldWidget extends StatefulWidget {
   final String? Function(String?) validator;
   final TextInputType keyboardType;
   final List<TextInputFormatter>? inputFormatter;
+  final bool enable;
 
   const AppTextFieldWidget({
     super.key,
@@ -22,6 +23,7 @@ class AppTextFieldWidget extends StatefulWidget {
     required this.validator,
     this.keyboardType = TextInputType.name,
     this.inputFormatter,
+    this.enable = true,
   });
 
   @override
@@ -32,11 +34,13 @@ class _AppTextFieldWidgetState extends State<AppTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget.enable,
       inputFormatters: widget.inputFormatter,
       keyboardType: widget.keyboardType,
       controller: widget.controller,
       validator: widget.validator,
       decoration: InputDecoration(
+        errorStyle: const TextStyle(height: 0),
         label: Text(
           widget.label,
           style: AppTypography.overline.copyWith(fontSize: 16),

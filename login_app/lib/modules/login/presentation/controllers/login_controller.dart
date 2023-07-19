@@ -28,6 +28,8 @@ class LoginController {
   }
 
   void createAccount() {
+    emailController.clear();
+    passwordController.clear();
     Modular.to.pushNamed(AppRoutes.registration);
   }
 

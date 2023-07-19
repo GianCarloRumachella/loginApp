@@ -25,6 +25,7 @@ class _AppPasswordTextfieldWidgetState extends State<AppPasswordTextfieldWidget>
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.name,
       obscureText: _obscureText,
       controller: widget.controller,
       validator: widget.validator,

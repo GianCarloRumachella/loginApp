@@ -18,7 +18,6 @@ class HomeController extends ChangeNotifier {
   ValueNotifier<List<AppAddressWidget>> addresses = ValueNotifier([]);
 
   void init(BuildContext context) async {
-    print("chamando o init");
     addresses.value.clear();
     user.value = await SecureStorage().getSession();
     final response = await _usecase.call(user.value.id.toString());
@@ -29,11 +28,11 @@ class HomeController extends ChangeNotifier {
       for (var address in r) {
         addresses.value.add(AppAddressWidget(model: address));
       }
+      notifyListeners();
     });
-    notifyListeners();
   }
 
-  addAddress() {
+  addAddress(BuildContext context) {
     Modular.to.pushNamed(AppRoutes.address);
   }
 }

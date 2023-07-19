@@ -37,6 +37,7 @@ class AddressController extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
 
   ValueNotifier<bool> enableButton = ValueNotifier(false);
+  ValueNotifier<bool> noNumber = ValueNotifier(false);
   String idAddress = '';
 
   setupAddressToEdit(AddressModel model) {
@@ -48,6 +49,7 @@ class AddressController extends ChangeNotifier {
     neighborhoodController.text = model.neighborhood;
     cityController.text = model.city;
     stateController.text = model.state;
+    noNumber.value = model.number == null ? true : false;
   }
 
   validateForm() {
@@ -56,6 +58,18 @@ class AddressController extends ChangeNotifier {
     } else {
       enableButton.value = false;
     }
+  }
+
+  changeCheckBox(bool value) {
+    numberController.clear();
+    noNumber.value = value;
+    if (!value) {
+      enableButton.value = false;
+    } else {
+      validateForm();
+      enableButton.value = true;
+    }
+    notifyListeners();
   }
 
   getZipCode(BuildContext context) async {
@@ -99,20 +113,7 @@ class AddressController extends ChangeNotifier {
         AppAlerts().snackBar(context: context, message: l.message);
       },
       (r) {
-        AppAlerts().alert(
-          context: context,
-          title: 'Atualizado',
-          message: 'Seu endereço foi atualizado com sucesso',
-          buttons: AppButtonWidget(
-            onPressed: () {
-              Modular.to.pop();
-            },
-            label: 'Ok',
-          ),
-        );
-        Modular.to.pushNamedAndRemoveUntil(AppRoutes.home, ModalRoute.withName(AppRoutes.home));
-
-        notifyListeners();
+        alert(context, 'Atualizado', 'Seu endereço foi atualizado com sucesso');
       },
     );
   }
@@ -139,21 +140,25 @@ class AddressController extends ChangeNotifier {
         AppAlerts().snackBar(context: context, message: l.message);
       },
       (r) {
-        AppAlerts().alert(
-          context: context,
-          title: 'Salvo',
-          message: 'Seu endereço foi salvo com sucesso',
-          buttons: AppButtonWidget(
-            onPressed: () {
-              Modular.to.pop();
-            },
-            label: 'Ok',
-          ),
-        );
-        Modular.to.pushNamedAndRemoveUntil(AppRoutes.home, ModalRoute.withName(AppRoutes.home));
-        Modular.get<HomeController>().init(context);
-        notifyListeners();
+        alert(context, 'Salvo', 'Seu endereço foi salvo com sucesso');
       },
     );
+  }
+
+  void alert(BuildContext context, String title, String message) {
+    AppAlerts().alert(
+      context: context,
+      title: 'Salvo',
+      message: 'Seu endereço foi salvo com sucesso',
+      buttons: AppButtonWidget(
+        onPressed: () {
+          Modular.to.popUntil(ModalRoute.withName(AppRoutes.home));
+          Modular.get<HomeController>().init(context);
+        },
+        label: 'Ok',
+      ),
+    );
+
+    notifyListeners();
   }
 }

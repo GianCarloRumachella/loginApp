@@ -63,7 +63,23 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 70),
-                Text('Meus Endereços', style: AppTypography.textBig),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Meus Endereços', style: AppTypography.textBig),
+                    IconButton(
+                      onPressed: () {
+                        _controller.init(context);
+                        setState(() {});
+                      },
+                      icon: Icon(
+                        Icons.refresh,
+                        size: 18,
+                        color: Colors.blueGrey[700],
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 24),
                 SizedBox(
                   child: _controller.addresses.value.isNotEmpty
@@ -89,7 +105,7 @@ class _HomePageState extends State<HomePage> {
         ),
         bottom: AppButtonWidget(
           onPressed: () {
-            _controller.addAddress();
+            _controller.addAddress(context);
           },
           label: 'Adicionar endereço',
           type: ButtonType.green,
