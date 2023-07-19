@@ -11,14 +11,14 @@ abstract class AuthUserUsecase {
 }
 
 class AuthUserUsecaseImp implements AuthUserUsecase {
-  final LoginRepository repository;
+  final LoginRepository _repository;
 
   AuthUserUsecaseImp({
-    required this.repository,
-  });
+    required LoginRepository repository,
+  }) : _repository = repository;
 
   @override
   Future<Either<Failure, UserModel>> call(LoginModel loginModel) async {
-    return repository.authUser(loginModel);
+    return _repository.authUser(loginModel);
   }
 }

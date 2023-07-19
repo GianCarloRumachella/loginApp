@@ -9,13 +9,13 @@ abstract class CreateUserUsecase {
 }
 
 class CreateUserUsecaseImp implements CreateUserUsecase {
-  final RegistrationRepository repository;
+  final RegistrationRepository _repository;
   CreateUserUsecaseImp({
-    required this.repository,
-  });
+    required RegistrationRepository repository,
+  }) : _repository = repository;
 
   @override
   Future<Either<Failure, int>> call(RegistrationModel registrationModel) async {
-    return await repository.createUser(registrationModel);
+    return await _repository.createUser(registrationModel);
   }
 }

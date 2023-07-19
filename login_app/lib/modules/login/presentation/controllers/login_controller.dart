@@ -44,6 +44,9 @@ class LoginController {
     }, (r) async {
       await SecureStorage().saveSession(r);
 
+      emailController.clear();
+      passwordController.clear();
+
       Modular.to.pushNamed(AppRoutes.home);
     });
   }

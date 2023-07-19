@@ -7,16 +7,16 @@ import 'package:login_app/modules/registration/data/models/registration_model.da
 import 'package:login_app/modules/registration/domain/repositories/registration_repository.dart';
 
 class RegistrationRepositoryImp implements RegistrationRepository {
-  final ResgistrationDatasource datasource;
+  final ResgistrationDatasource _datasource;
 
   RegistrationRepositoryImp({
-    required this.datasource,
-  });
+    required ResgistrationDatasource datasource,
+  }) : _datasource = datasource;
 
   @override
   Future<Either<Failure, int>> createUser(RegistrationModel registrationModel) async {
     try {
-      var response = await datasource.createUser(registrationModel);
+      var response = await _datasource.createUser(registrationModel);
       return Right(response);
     } on Failure catch (e) {
       return Left(Failure(e.message));

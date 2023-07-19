@@ -17,7 +17,8 @@ class _AppAddressWidgetState extends State<AppAddressWidget> {
   @override
   void initState() {
     AddressModel tempModel = widget.model;
-    completeAddress = "${tempModel.street}, ${tempModel.number ?? '-'}, ${tempModel.complement.isEmpty ? '' : tempModel.complement} ${tempModel.neighborhood}, ${tempModel.city} - ${tempModel.state}";
+    completeAddress =
+        "${tempModel.street}, ${tempModel.number ?? (tempModel.number!.isEmpty ? '' : '${tempModel.number},')}${tempModel.complement.isEmpty ? '' : tempModel.complement} ${tempModel.neighborhood}, ${tempModel.city} - ${tempModel.state}";
     super.initState();
   }
 

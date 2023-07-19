@@ -7,16 +7,16 @@ import 'package:login_app/modules/login/data/models/login_model.dart';
 import 'package:login_app/modules/login/domain/repositories/login_repository.dart';
 
 class LoginRepositoryImp implements LoginRepository {
-  final LoginDatasource datasource;
+  final LoginDatasource _datasource;
 
   LoginRepositoryImp({
-    required this.datasource,
-  });
+    required LoginDatasource datasource,
+  }) : _datasource = datasource;
 
   @override
   Future<Either<Failure, UserModel>> authUser(LoginModel loginModel) async {
     try {
-      var response = await datasource.authUser(loginModel);
+      var response = await _datasource.authUser(loginModel);
       return Right(response);
     } on Failure catch (e) {
       return Left(Failure(e.message));
